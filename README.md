@@ -15,4 +15,4 @@ For this approach you'll need a Python3 environment with the packages listed in 
 ## How to deploy the client
 In a terminal type `python test_client.py`
 
-This client was made both as an example and also to facilitate the use of this service. Inside the [python client](test/test_client.py) you'll find an example of how you can use it in your own code.
+This client was made both as an example and also to facilitate the use of this service. Inside the [Python client](test/test_client.py) you'll find an example of how you can use it in your own code.
