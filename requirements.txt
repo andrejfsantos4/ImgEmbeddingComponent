@@ -1,0 +1,6 @@
+grpcio
+grpcio-reflection
+numpy
+Pillow
+torch
+torchvision

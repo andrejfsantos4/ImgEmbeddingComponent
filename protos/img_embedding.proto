@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// Service for obtaining the embedding of an image
+service ImgEmbedding {
+  // Receives an image and returns its embedding from a VGG16
+  rpc GetImgEmbedding(Image) returns (Float1DArray) {}
+}
+
+/*
+ * Message for images. Each image is serialized to a byte stream
+ * :param data: image encoded as a byte stream
+ */
+message Image {
+  bytes data = 1;
+}
+
+/*
+ * Message to represent a one-dimensional float array
+ * :param elems: element in array
+ */
+message Float1DArray {
+  repeated float elems = 1;
+}
