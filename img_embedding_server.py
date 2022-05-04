@@ -1,3 +1,4 @@
+from os import path
 from concurrent import futures
 import grpc
 import grpc_reflection.v1alpha.reflection as grpc_reflection
@@ -16,10 +17,15 @@ class ImgEmbeddingServicer(pb_grpc.ImgEmbeddingServicer):
     """Provides methods that implement functionality of image embedding server."""
 
     def __init__(self) -> None:
-        logging.info("Loading VGG16...")
-        self.full_model = models.vgg16()
-        # Load the pretrained weights from a file
-        self.full_model.load_state_dict(torch.load("vgg16-397923af.pth"))
+        # Determine whether to load the model from a local file or fetch it from PyTorch
+        if path.isfile("vgg16-397923af.pth"):
+            logging.info("Loading VGG16 from local file...")
+            self.full_model = models.vgg16()
+            # Load the pretrained weights from a file
+            self.full_model.load_state_dict(torch.load("vgg16-397923af.pth"))
+        else:
+            logging.info("Loading VGG16 from PyTorch...")
+            self.full_model = models.vgg16(pretrained=True)
         self.model = self.full_model.features
 
     def GetImgEmbedding(self, request: pb.Image, context) -> pb.Float1DArray:
